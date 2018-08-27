@@ -50,7 +50,7 @@
         <!-- Please don't remove this, keep my open source work credited :) -->
         <p class="credits theme-by text-muted">
           {{ i18n "poweredBy" . | safeHTML }}
-          {{ $CUR_SHA = getenv "CI_COMMIT_SHA" }}
+          {{ $CUR_SHA := getenv "CI_COMMIT_SHA" }}
           {{ with .Site.Params.commit }}&nbsp;&bull;&nbsp;[<a href="{{.}}{{ $CUR_SHA }}">{{ substr 0 8 $CUR_SHA }}</a>]{{ end }}
         </p>
       </div>
