@@ -9,7 +9,11 @@
                 <a href="{{ printf .url (index $.Site.Author .id) }}" title="{{ .title }}">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa {{ .icon }} fa-stack-1x fa-inverse"></i>
+                    {{- if eq .id "email"}}
+                      <i class="fa {{ .icon }} fa-stack-1x fa-inverse"></i>
+                    {{ else }}
+                      <i class="fab {{ .icon }} fa-stack-1x fa-inverse"></i>
+                    {{ end }}
                   </span>
                 </a>
               </li>
