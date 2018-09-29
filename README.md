@@ -4,9 +4,14 @@
 
 ## Installation
 
-    $ mkdir themes
-    $ cd themes
-    $ git clone https://github.com/halogenica/beautifulhugo.git beautifulhugo
+Under an existing Hugo site (create one by following
+[Hugo's Quick Start Guide](https://gohugo.io/getting-started/quick-start/#step-3-add-a-theme)),
+add this theme as a Git submodule.
+
+
+    $ cd your-hugo-dir
+    $ git init
+    $ git submodule add https://github.com/halogenica/beautifulhugo.git themes/beautifulhugo
 
 See [the Hugo documentation](https://gohugo.io/themes/installing/) for more information.
 
