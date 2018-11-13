@@ -8,10 +8,9 @@ Under an existing Hugo site (create one by following
 [Hugo's Quick Start Guide](https://gohugo.io/getting-started/quick-start/#step-3-add-a-theme)),
 add this theme as a Git submodule.
 
-
-    $ cd your-hugo-dir
-    $ git init
-    $ git submodule add https://github.com/halogenica/beautifulhugo.git themes/beautifulhugo
+    $ mkdir themes
+    $ cd themes
+    $ git submodule add https://gitlab.com/vincenttam/beautifulhugo.git beautifulhugo
 
 See [the Hugo documentation](https://gohugo.io/themes/installing/) for more information.
 
@@ -49,7 +48,7 @@ pygmentsStyle = "trac"
 pygmentsUseClassic = true
 ```
 
-Pygments is mostly compatable with the newer Chroma. It is slower but has some additional theme options. I recommend Chroma over Pygments.
+Pygments is mostly compatable with the newer Chroma. It is slower but has some additional theme options. I recommend Chroma over Pygments. Pygments will use `syntax.css` for highlighting, unless you also set the config `pygmentsUseClasses = false` which will generate the style code directly in the HTML file. 
 
 #### Highlight.js - Client side syntax highlighting
 ```
@@ -119,7 +118,33 @@ If the source of your site is in a Git repo, the SHA corresponding to the commit
 ```
   
 See at [vincenttam/vincenttam.gitlab.io](https://gitlab.com/vincenttam/vincenttam.gitlab.io) an example of how to add it to a GitLab continuous integration system.
-  
+ 
+### Extra shortcodes
+
+There are two extra shortcodes provided (along with the customized figure shortcode):
+
+#### Details
+
+This simply adds the html5 detail attribute, supported on all *modern* browsers. Use it like this:
+
+```
+{{% details "This is the details title (click to expand)" %}}
+This is the content (hidden until clicked).
+{{% /details %}}
+```
+
+#### Split
+
+This adds a two column side-by-side environment (will turn into 1 col for narrow devices):
+
+```
+{{< columns >}}
+This is column 1.
+{{< column >}}
+This is column 2.
+{{< endcolumn >}}
+```
+
 ## About
 
 This is a port of the Jekyll theme [Beautiful Jekyll](https://deanattali.com/beautiful-jekyll/) by [Dean Attali](https://deanattali.com/aboutme#contact). It supports most of the features of the original theme.
