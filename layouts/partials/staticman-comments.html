@@ -14,11 +14,12 @@
       <h3>{{ i18n "noComment" }}</h3>
     {{ end }}
 
-
     {{ $.Scratch.Set "hasComments" 0 }}
-    {{ range $index, $comments := (index $.Site.Data.comments $slug ) }}
-      {{ if not .parent }}
+    {{ range $comments }}
+      {{ if not .replyThread }}
         {{ $.Scratch.Add "hasComments" 1 }}
+        {{ $.Scratch.Set "hasReplies" 0 }}
+        {{ $.Scratch.Set "threadID" ._id }}
         <article id="comment-{{ $.Scratch.Get "hasComments" }}" class="static-comment">
           <img class="comment-avatar" src="https://www.gravatar.com/avatar/{{ .email }}?s=48">
           {{ if .website }}
@@ -26,18 +27,44 @@
           {{ else }}
           <h4 class="comment-author">{{ .name }}</h4>
           {{ end }}
-          <div class="comment-timestamp"><a href="#comment-{{ $.Scratch.Get "hasComments" }}" title="Permalink to this comment"><time datetime="{{ .date }}">{{ dateFormat (default (i18n "shortdateFormat") .Site.Params.dateformat) .date}}</time></a></div>
+          <div class="comment-timestamp"><a href="#comment-{{ $.Scratch.Get "hasComments" }}" title="Permalink to this comment"><time datetime="{{ .date }}">{{ dateFormat (default (i18n "shortdateFormat") .Site.Params.dateformat) .date }}</time></a></div>
           <div class="comment-content"><p>{{ .comment | markdownify }}</p></div>
+          <div class="comment-reply-btn">
+            <a id="{{ ._id }}" class="btn" href="#comment-form" title="{{ ._id }}">Reply to {{ .name }}</a>
+          </div>
         </article>
+
+        {{ range $comments }}
+          {{ if eq .replyThread ($.Scratch.Get "threadID") }}
+            {{ $.Scratch.Add "hasReplies" 1 }}
+            <article id="comment-{{ $.Scratch.Get "hasComments" }}r{{ $.Scratch.Get "hasReplies" }}" class="static-comment static-comment-reply">
+              <img class="comment-avatar" src="https://www.gravatar.com/avatar/{{ .email }}?s=48">
+              {{ if .website }}
+              <h4 class="comment-author"><a rel="external nofollow" href="{{ .website }}">{{ .name }}</a></h4>
+              {{ else }}
+              <h4 class="comment-author">{{ .name }}</h4>
+              {{ end }}
+              <h5 class="comment-reply-target"><a href="#{{ .replyID }}"><i class="fas fa-reply"></i> {{ .replyName }}</a></h5>
+              <div class="comment-timestamp"><a href="#comment-{{ $.Scratch.Get "hasComments" }}r{{ $.Scratch.Get "hasReplies" }}" title="Permalink to this comment"><time datetime="{{ .date }}">{{ dateFormat (default (i18n "shortdateFormat") .Site.Params.dateformat) .date }}</time></a></div>
+              <div class="comment-content"><p>{{ .comment | markdownify }}</p></div>
+              <div class="comment-reply-btn">
+                <a id="{{ ._id }}" class="btn" href="#comment-form" title="{{ $.Scratch.Get "threadID" }}">Reply to {{ .name }}</a>
+              </div>
+            </article>
+          {{ end }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
 
 
 
-<form class="js-form form" method="post" action="{{ .Site.Params.staticman.api}}">
+<form id="comment-form" class="js-form form" method="post" action="{{ .Site.Params.staticman.api }}">
   <input type="hidden" name="options[slug]" value="{{ replace .URL "/" "" }}">
   <input type="hidden" name="options[parent]" value="">
+  <input type="hidden" name="fields[replyThread]" value="">
+  <input type="hidden" name="fields[replyID]" value="">
+  <input type="hidden" name="fields[replyName]" value="">
 
   {{ if .Site.Params.staticman.recaptcha }}
   <input type="hidden" name="options[reCaptcha][siteKey]" value="{{ .Site.Params.staticman.recaptcha.sitekey }}">
@@ -75,8 +102,11 @@
   {{ end }}
 
   <fieldset>
-    <button class="button">
+    <button type="submit" class="button">
       Submit
+    </button>
+    <button type="reset" value="Reset">
+      Reset
     </button>
   </fieldset>
 </form>
