@@ -110,14 +110,15 @@ To add Google Analytics, simply sign up to [Google Analytics](https://www.google
 
 ### Commit SHA on the footer
 
-If the source of your site is in a Git repo, the SHA corresponding to the commit the site is built from can be shown on the footer. To do so, parameter `commit` has to be defined in the config file:
+If the source of your site is in a Git repo, the SHA corresponding to the commit the site is built from can be shown on the footer. To do so, two site parameters `commit` has to be defined in the config file `config.toml`:
 
 ```
+enableGitInfo = true
 [Params]
-  commit = "https://gitlab.com/<username>/<siterepo>/tree/"
+  commit = "https://github.com/<username>/<siterepo>/tree/"
 ```
-  
-See at [vincenttam/vincenttam.gitlab.io](https://gitlab.com/vincenttam/vincenttam.gitlab.io) an example of how to add it to a GitLab continuous integration system.
+
+See at [vincenttam/vincenttam.gitlab.io](https://gitlab.com/vincenttam/vincenttam.gitlab.io) for an example of how to add it to a continuous integration system.
  
 ### Extra shortcodes
 
