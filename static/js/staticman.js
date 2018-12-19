@@ -41,6 +41,7 @@
 
   function clearForm() {
     $('input').val("");
+    $('textarea').val("");
     $('.js-form fieldset button.button').text('Submit');
   }
 
