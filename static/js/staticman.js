@@ -16,6 +16,7 @@
       success: function (data) {
         showModal('Perfect !', 'Thanks for your comment! It will show on the site once it has been approved. .');
         $(form).removeClass('form--loading');
+        clearForm();
       },
       error: function (err) {
         console.log(err);
@@ -38,6 +39,12 @@
     $('body').addClass('show-modal');
   }
 
+  function clearForm() {
+    $('input').val("");
+    $('.js-form fieldset button.button').text('Submit');
+  }
+
+  // record reply target when "reply to this comment" is pressed
   $('.comment-reply-btn a').click(function (){
     $('input[name="fields[replyThread]"]').val(this.title);
     $('input[name="fields[replyID]"]').val(this.id);
@@ -46,14 +53,12 @@
     $('.js-form fieldset button.button').text('Submit reply');
   });
 
+  // clear form when reset button is clicked
   $('.js-form fieldset button[type="reset"]').click(function (){
-    $('input[name="fields[replyThread]"]').val("");
-    $('input[name="fields[replyID]"]').val("");
-    $('input[name="fields[replyName]"]').val("");
-    $('.js-form fieldset button.button').text('Submit');
+    clearForm();
   });
 
-
+  // smooth scroll to reply target
   $('.comment-reply-target a[href^="#"]').click(function (){
     targetPostID = $(this).attr('href');
     targetID = "#" + $(targetPostID).parents('.static-comment').attr('id');
