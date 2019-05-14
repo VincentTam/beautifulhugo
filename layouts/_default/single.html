@@ -6,6 +6,16 @@
       <article role="main" class="blog-post">
         {{ .Content }}
 
+        <!-- allow embed non-index HTML document to index page in leaf bundle -->
+        {{ if .Params.embedHTML }}
+        <div class="HTMLembed">
+            {{ (.Resources.GetMatch "documents/*.htm").Content | safeHTML }}
+            {{ (.Resources.GetMatch "documents/*.html").Content | safeHTML }}
+            <script>{{ (.Resources.GetMatch "js/*.js").Content | safeJS }}</script>
+        </div>
+        {{ end }}
+
+
         {{ if .Params.tags }}
           <div class="blog-tags">
             {{ range .Params.tags }}
