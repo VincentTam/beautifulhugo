@@ -14,30 +14,30 @@ $( document ).ready(function() {
     if ($(this).attr('class') == 'no-photoswipe') return true; // ignore any figures where class="no-photoswipe"
     // get properties from child a/img/figcaption elements,
     var $figure = $(this),
-      $a    = $figure.find('a'),
-      $img  = $figure.find('img'),
-      $src  = $a.attr('href'),
-      $title  = $img.attr('alt'),
+      $a = $figure.find('a'),
+      $img = $figure.find('img'),
+      $src = $a.attr('href'),
+      $title = $img.attr('alt'),
       $msrc = $img.attr('src');
     // if data-size on <a> tag is set, read it and create an item
     if ($a.data('size')) {
       var $size   = $a.data('size').split('x');
       var item = {
-        src   : $src,
-        w   : $size[0],
-        h     : $size[1],
-        title   : $title,
-        msrc  : $msrc
+        src: $src,
+        w: $size[0],
+        h: $size[1],
+        title: $title,
+        msrc: $msrc
       };
       //console.log("Using pre-defined dimensions for " + $src);
     // if not, set temp default size then load the image to check actual size
     } else {
       var item = {
-        src   : $src,
-        w   : 800, // temp default size
-        h     : 600, // temp default size
-        title   : $title,
-        msrc  : $msrc
+        src: $src,
+        w: 800, // temp default size
+        h: 600, // temp default size
+        title: $title,
+        msrc: $msrc
       };
       //console.log("Using default dimensions for " + $src);
       // load the image to check its dimensions
