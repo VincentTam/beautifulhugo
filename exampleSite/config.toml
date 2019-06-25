@@ -48,7 +48,6 @@ pygmentsCodefencesGuessSyntax = true
   website = "yourwebsite.com"
   email = "youremail@domain.com"
   facebook = "username"
-  googleplus = "+username" # or xxxxxxxxxxxxxxxxxxxxx
   github = "username"
   gitlab = "username"
   bitbucket = "username"
