@@ -58,11 +58,4 @@
   $('.js-form fieldset button[type="reset"]').click(function (){
     clearForm();
   });
-
-  // smooth scroll to reply target
-  $('.comment-reply-target a[href^="#"]').click(function (){
-    targetPostID = $(this).attr('href');
-    targetID = "#" + $(targetPostID).parents('.static-comment').attr('id');
-    $('html, body').animate({ scrollTop: $(targetID).offset().top-$('nav').height() }, 500);
-  });
 })(jQuery);
