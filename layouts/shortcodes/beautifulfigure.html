@@ -3,7 +3,7 @@ Put this file in /layouts/shortcodes/beautifulfigure.html
 Documentation and licence at https://github.com/liwenyip/hugo-easy-gallery/
 -->
 <!-- count how many times we've called this shortcode; load the css if it's the first time -->
-{{- if not ($.Page.Scratch.Get "figurecount") }}<link rel="stylesheet" href="/css/hugo-easy-gallery.css" />{{ end }}
+{{- if not ($.Page.Scratch.Get "figurecount") }}<link rel="stylesheet" href="{{ "css/hugo-easy-gallery.css" | absURL}}" />{{ end }}
 {{- $.Page.Scratch.Add "figurecount" 1 -}}
 <!-- use either src or link-thumb for thumbnail image -->
 {{- $thumb := .Get "src" | default (printf "%s." (.Get "thumb") | replace (.Get "link") ".") }}
