@@ -5,27 +5,33 @@ $( document ).ready(function() {
 
   $('.js-form').submit(function () {
     var form = this;
+    let url = '{{ .api }}';
+    let data = $(this).serialize();
 
     $(form).addClass('form--loading');
     $('button[type="submit"]:enabled').addClass('hidden'); // hide "submit"
     $('button[type="submit"]:disabled').removeClass('hidden'); // show "submitted"
 
-    $.ajax({
-      type: $(this).attr('method'),
-      url: '{{ .api }}',
-      data: $(this).serialize(),
-      contentType: 'application/x-www-form-urlencoded',
-      success: function (data) {
-        showAlert('success');
-        setTimeout(function(){ clearForm() }, 3000); // display success message for 3s
-        $(form).removeClass('form--loading');
-      },
-      error: function (err) {
-        console.log(err);
-        showAlert('failed');
-        $(form).removeClass('form--loading');
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.onreadystatechange = function () {
+      if(xhr.readyState === XMLHttpRequest.DONE) {
+        var status = xhr.status;
+        if (status >= 200 && status < 400) {
+          showAlert('success');
+          setTimeout(function(){ clearForm() }, 3000); // display success message for 3s
+          $(form).removeClass('form--loading');
+        } else {
+          console.error(xhr.statusText);
+          showAlert('failed');
+          $(form).removeClass('form--loading');
+        }
       }
-    });
+    };
+
+    xhr.send(data);
 
     return false;
   });
