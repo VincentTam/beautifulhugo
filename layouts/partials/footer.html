@@ -86,7 +86,20 @@
 <script> hljs.initHighlightingOnLoad(); </script>
 <script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script>
 {{- end  }}
-<script> renderMathInElement(document.body); </script>
+<script>
+  renderMathInElement(
+    document.body,
+    {
+      delimiters: [
+        {left: "$", right: "$", display: false},
+        {left: "\\begin{equation}", right: "\\end{equation}", display: true},
+        {left: "\\begin{align}", right: "\\end{align}", display: true},
+        {left: "\\begin{alignat}", right: "\\end{alignat}", display: true},
+        {left: "\\begin{gather}", right: "\\end{gather}", display: true}
+      ]
+    }
+  );
+</script>
 
 {{- if .Site.Params.selfHosted -}}
 <script src="{{ "js/photoswipe.min.js" | absURL }}"></script>
