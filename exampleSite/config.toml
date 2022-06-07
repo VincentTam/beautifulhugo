@@ -26,6 +26,7 @@ pygmentsCodefencesGuessSyntax = true
   readingTime = true
   wordCount = true
   useHLJS = true
+  selfHosted = true
   socialShare = true
   toc = true
   delayDisqus = true

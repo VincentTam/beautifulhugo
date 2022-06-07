@@ -48,3 +48,6 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Hugo build lock
+exampleSite/.hugo_build.lock
