@@ -2,6 +2,10 @@
 
 ![Beautiful Hugo Theme Screenshot](https://gitlab.com/VincentTam/beautifulhugo/raw/dev/images/screenshot.png)
 
+## Live demo
+
+See https://hugo-theme-beautifulhugo.netlify.app/
+
 ## Installation
 
 Under an existing Hugo site (create one by following
@@ -9,10 +13,15 @@ Under an existing Hugo site (create one by following
 add this theme as a Git submodule.
 
     $ mkdir themes
-    $ cd themes
-    $ git submodule add https://gitlab.com/vincenttam/beautifulhugo.git beautifulhugo
+    $ git submodule add https://gitlab.com/vincenttam/beautifulhugo.git themes/beautifulhugo
 
-See [the Hugo documentation](https://gohugo.io/themes/installing/) for more information.
+Copy the content of `exampleSite` at the root of your project:
+
+    cp -r themes/beautifulhugo/exampleSite/* . -iv
+    
+Start Hugo:
+
+    hugo serve
 
 ## Extra Features
 
@@ -111,6 +120,8 @@ comments:
 
 To add Google Analytics, simply sign up to [Google Analytics](https://www.google.com/analytics/) to obtain your Google Tracking ID, and add this tracking ID to the `googleAnalytics` parameter in `config.toml`.
 
+Note that the Google Analytics tracking code will only be inserted into the page when the site isn't served on Hugo's built-in server, to prevent tracking from local testing environments.
+
 ### Commit SHA on the footer
 
 If the source of your site is in a Git repo, the SHA corresponding to the commit the site is built from can be shown on the footer. To do so, two site parameters `commit` has to be defined in the config file `config.toml`:
@@ -150,6 +161,17 @@ content/      content/      content/
 
 ```
 
+### Self Hosted assets for GDPR / EU-DSGVO compliance
+
+With default settings, visiting to a website using Beautifulhugo connects also to remote services like google fonts or jsdelivr to embed fonts, js and other assets.
+
+To avoid this, set the following param in config.toml:
+
+```
+[Params]
+  selfHosted = true
+```
+
 ### Extra shortcodes
 
 There are two extra shortcodes provided (along with the customized figure shortcode):
@@ -173,7 +195,7 @@ This adds a two column side-by-side environment (will turn into 1 col for narrow
 This is column 1.
 {{< column >}}
 This is column 2.
-{{< endcolumn >}}
+{{< endcolumns >}}
 ```
 
 ## About

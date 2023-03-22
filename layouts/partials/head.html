@@ -26,10 +26,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<!-- Site Title, Description, Author, and Favicon -->
-{{- with ($.Scratch.Get "Title") }}
-  <title>{{ . }} - {{ $.Site.Title }}</title>
-{{- end }}
+
+ <!-- Site Title, Description, Author, and Favicon -->
+
+{{ if .IsHome }}
+    {{- with .Site.Params.homeTitle }}
+      <title>{{ . }}</title>
+    {{- end }}
+  {{ else }}
+    {{- with ($.Scratch.Get "Title") }}
+      <title>{{ . }} - {{ $.Site.Params.homeTitle }}</title>
+    {{- end }}
+{{ end }}
+
 {{- with ($.Scratch.Get "Description") }}
   <meta name="description" content="{{ . }}">
 {{- end }}
@@ -89,4 +98,6 @@
   {{- end -}}
 
 {{- partial "head_custom.html" . }}
-{{ template "_internal/google_analytics_async.html" . }}
+{{- if not .Site.IsServer -}}
+  {{ template "_internal/google_analytics.html" . }}
+{{- end -}}
