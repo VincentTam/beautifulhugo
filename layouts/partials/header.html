@@ -28,7 +28,8 @@
 
   <header class="header-section {{ if $bigimg }}has-img{{ end }}">
     {{ if $bigimg }}
-      <div class="intro-header big-img">
+      {{ $firstimg := index $bigimg 0 }}
+      <div class="intro-header big-img" style="background-image: url('{{$firstimg.src}}');">
         {{ $subtitle := $.Scratch.Get "subtitle" }}
         <div class="container">
           <div class="row">
@@ -50,7 +51,7 @@
             </div>
           </div>
         </div>
-        <span class="img-desc" style="display: inline;"></span>
+        <span class="img-desc" style="display: {{ cond (isset $firstimg "desc") "inline" "none"}};">{{$firstimg.desc}}</span>
       </div>
     {{end}}
     {{ if $title }}
