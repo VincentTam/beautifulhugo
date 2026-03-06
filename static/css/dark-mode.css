@@ -1,0 +1,79 @@
+@media (prefers-color-scheme: dark) {
+  /* Solarized Dark base colors */
+  :root {
+    --sol-base03:  #002b36;
+    --sol-base02:  #073642;
+    --sol-base01:  #586e75;
+    --sol-base00:  #657b83;
+    --sol-base0:   #839496;
+    --sol-base1:   #93a1a1;
+    --sol-base2:   #eee8d5;
+    --sol-base3:   #fdf6e3;
+    --sol-yellow:  #b58900;
+    --sol-blue:    #268bd2;
+  }
+
+  body {
+    background-color: #002b36;
+    color: #839496;
+  }
+
+  /* Navbar */
+  .navbar-custom {
+    background-color: #073642;
+  }
+  .navbar-custom .navbar-brand,
+  .navbar-custom .nav li a {
+    color: #93a1a1 !important;
+  }
+  .navbar-custom .nav li a:hover {
+    color: #eee8d5 !important;
+  }
+
+  /* Main content area */
+  .container .row {
+    background-color: #073642;
+  }
+
+  /* Post text */
+  .post-heading h1,
+  .post-title,
+  h1, h2, h3, h4, h5, h6 {
+    color: #93a1a1;
+  }
+
+  p, li {
+    color: #839496;
+  }
+
+  /* Links */
+  a {
+    color: #268bd2;
+  }
+  a:hover {
+    color: #2aa198;
+  }
+
+  /* Code blocks */
+  pre, code {
+    background-color: #073642;
+    color: #839496;
+    border-color: #586e75;
+  }
+
+  /* Intro header / hero */
+  .intro-header {
+    background-color: #002b36;
+  }
+
+  /* Cards / post previews */
+  .post-preview {
+    border-bottom-color: #586e75;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #073642;
+    color: #657b83;
+  }
+}

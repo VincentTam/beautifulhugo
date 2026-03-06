@@ -81,6 +81,8 @@
   {{- end -}}
 
   <link rel="stylesheet" href="{{ "css/main.css" | absURL }}" />
+  <!-- Dark mode in Solarized Theme -->
+  <link rel="stylesheet" href="{{ "css/dark-mode.css" | absURL }}">
 
   {{- if .Site.Params.staticman -}}
   {{ $smcss := resources.Get "css/staticman.css" }}
